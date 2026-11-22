@@ -1,14 +1,21 @@
 {
-  "regions": ["hnd1"],
-  "crons": [
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "app": {
+      "root": ".",
+      "framework": "nextjs"
+    },
+    "gitbook": {
+      "root": "gitbook",
+      "framework": "nextjs"
+    }
+  },
+  "rewrites": [
     {
-      "path": "/api/cron/refresh-tokens",
-      "schedule": "0 0 * * *"
+      "source": "/(.*)",
+      "destination": {
+        "service": "app"
+      }
     }
-  ],
-  "functions": {
-    "src/app/api/cron/refresh-tokens/route.js": {
-      "maxDuration": 60
-    }
-  }
+  ]
 }
